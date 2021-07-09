@@ -63,3 +63,36 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+const jsGallery = document.querySelector('.js-gallery');
+
+const listEl = galleryItems
+  .map(
+    ({ preview, original, description }) =>
+      //=========================== ${original}================
+      `<li class="gallery__item"><img class="gallery__image" src="${preview}" alt="${description}"></li>`,
+  )
+  .join('');
+
+jsGallery.insertAdjacentHTML('beforeend', listEl);
+jsGallery.addEventListener('click', openModalHandler);
+
+const modal = document.querySelector('.js-lightbox');
+const modalClose = document.querySelector('[data-action="close-lightbox"]');
+
+modalClose.addEventListener('click', closeModalHandler);
+
+//=============== Function Open Modal ====================================
+function openModalHandler(event) {
+  event.preventDefault();
+
+  console.log('мы там что-то кликнули');
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  modal.classList.add('is-open');
+}
+//=============== Function Close Modal ====================================
+function closeModalHandler() {
+  modal.classList.remove('is-open');
+}
