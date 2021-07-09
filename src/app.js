@@ -69,8 +69,7 @@ const jsGallery = document.querySelector('.js-gallery');
 const listEl = galleryItems
   .map(
     ({ preview, original, description }) =>
-      //=========================== ${original}================
-      `<li class="gallery__item"><img class="gallery__image" src="${preview}" alt="${description}"></li>`,
+      `<li class="gallery__item"><a class="gallery__link" href = ${original}><img class="gallery__image" src="${preview}" alt="${description}"></li></a>`,
   )
   .join('');
 
@@ -79,6 +78,7 @@ jsGallery.addEventListener('click', openModalHandler);
 
 const modal = document.querySelector('.js-lightbox');
 const modalClose = document.querySelector('[data-action="close-lightbox"]');
+const modalImage = document.querySelector('.lightbox__image');
 
 modalClose.addEventListener('click', closeModalHandler);
 
@@ -87,12 +87,22 @@ function openModalHandler(event) {
   event.preventDefault();
 
   console.log('мы там что-то кликнули');
+
   if (event.target.nodeName !== 'IMG') {
     return;
   }
   modal.classList.add('is-open');
+  modalImage.src = event.target.parentNode.href;
+  modalImage.alt = event.target.alt;
+  // console.dir(event.target.parentNode.href);
+  console.dir(event.target);
 }
+
+//------------------------------------------------------------------------
 //=============== Function Close Modal ====================================
 function closeModalHandler() {
   modal.classList.remove('is-open');
+  modalImage.src = '';
+  modalImage.alt = '';
 }
+//------------------------------------------------------------------------
