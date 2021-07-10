@@ -80,29 +80,87 @@ const modal = document.querySelector('.js-lightbox');
 const modalClose = document.querySelector('[data-action="close-lightbox"]');
 const modalImage = document.querySelector('.lightbox__image');
 
-modalClose.addEventListener('click', closeModalHandler);
+// modalClose.addEventListener('click', closeModalHandler);
+// window.addEventListener('click', altModalCloseHandler);
 
 //=============== Function Open Modal ====================================
 function openModalHandler(event) {
   event.preventDefault();
-
-  console.log('мы там что-то кликнули');
-
   if (event.target.nodeName !== 'IMG') {
     return;
   }
   modal.classList.add('is-open');
+
   modalImage.src = event.target.parentNode.href;
   modalImage.alt = event.target.alt;
-  // console.dir(event.target.parentNode.href);
-  console.dir(event.target);
+
+  modalClose.addEventListener('click', closeModalHandler);
+  window.addEventListener('click', altModalCloseHandler);
+
+  window.addEventListener('keydown', leftKeyHandler);
+  window.addEventListener('keydown', rightKeyHandler);
+  window.addEventListener('keydown', escapeHanler);
 }
 
-//------------------------------------------------------------------------
 //=============== Function Close Modal ====================================
 function closeModalHandler() {
   modal.classList.remove('is-open');
   modalImage.src = '';
   modalImage.alt = '';
+
+  modalClose.removeEventListener('click', closeModalHandler);
+  window.removeEventListener('click', altModalCloseHandler);
+
+  window.removeEventListener('keydown', leftKeyHandler);
+  window.removeEventListener('keydown', rightKeyHandler);
+  window.removeEventListener('keydown', escapeHanler);
+}
+//------------------------------------------------------------------------
+function altModalCloseHandler(event) {
+  if (event.target.nodeName === 'IMG') {
+    return;
+  }
+  closeModalHandler();
+}
+//------------------------------------------------------------------------
+function escapeHanler(evt) {
+  console.log(evt);
+  if (evt.code !== 'Escape') {
+    return;
+  }
+  closeModalHandler();
+}
+
+//=============== Function Left key ====================================
+function leftKeyHandler(evt) {
+  const originalSrcArray = galleryItems.map(({ original }) => original);
+  let currentImageIndex = originalSrcArray.indexOf(modalImage.src);
+  console.log(currentImageIndex);
+  if (!modal.classList.contains('is-open')) {
+    return;
+  }
+  if (evt.code !== 'ArrowLeft') {
+    return;
+  }
+  if (currentImageIndex === 0) {
+    return (modalImage.src = originalSrcArray[originalSrcArray.length - 1]);
+  }
+  modalImage.src = originalSrcArray[currentImageIndex - 1];
+}
+//=============== Function Right key ====================================
+function rightKeyHandler(evt) {
+  const originalSrcArray = galleryItems.map(({ original }) => original);
+  let currentImageIndex = originalSrcArray.indexOf(modalImage.src);
+
+  if (!modal.classList.contains('is-open')) {
+    return;
+  }
+  if (evt.code !== 'ArrowRight') {
+    return;
+  }
+  if (currentImageIndex === originalSrcArray.length - 1) {
+    return (modalImage.src = originalSrcArray[0]);
+  }
+  modalImage.src = originalSrcArray[currentImageIndex + 1];
 }
 //------------------------------------------------------------------------
