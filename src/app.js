@@ -79,9 +79,7 @@ jsGallery.addEventListener('click', openModalHandler);
 const modal = document.querySelector('.js-lightbox');
 const modalClose = document.querySelector('[data-action="close-lightbox"]');
 const modalImage = document.querySelector('.lightbox__image');
-
-// modalClose.addEventListener('click', closeModalHandler);
-// window.addEventListener('click', altModalCloseHandler);
+const originalSrcArray = galleryItems.map(({ original }) => original);
 
 //=============== Function Open Modal ====================================
 function openModalHandler(event) {
@@ -115,16 +113,15 @@ function closeModalHandler() {
   window.removeEventListener('keydown', rightKeyHandler);
   window.removeEventListener('keydown', escapeHanler);
 }
-//------------------------------------------------------------------------
+//--------------Alternative close Modal by clicking out of image-------------------------------
 function altModalCloseHandler(event) {
   if (event.target.nodeName === 'IMG') {
     return;
   }
   closeModalHandler();
 }
-//------------------------------------------------------------------------
+//--------------Alternative close Modal by clicking Escape button----------------------------
 function escapeHanler(evt) {
-  console.log(evt);
   if (evt.code !== 'Escape') {
     return;
   }
@@ -133,9 +130,7 @@ function escapeHanler(evt) {
 
 //=============== Function Left key ====================================
 function leftKeyHandler(evt) {
-  const originalSrcArray = galleryItems.map(({ original }) => original);
   let currentImageIndex = originalSrcArray.indexOf(modalImage.src);
-  console.log(currentImageIndex);
   if (!modal.classList.contains('is-open')) {
     return;
   }
@@ -149,9 +144,7 @@ function leftKeyHandler(evt) {
 }
 //=============== Function Right key ====================================
 function rightKeyHandler(evt) {
-  const originalSrcArray = galleryItems.map(({ original }) => original);
   let currentImageIndex = originalSrcArray.indexOf(modalImage.src);
-
   if (!modal.classList.contains('is-open')) {
     return;
   }
