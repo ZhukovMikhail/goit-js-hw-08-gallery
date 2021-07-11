@@ -120,7 +120,7 @@ function altModalCloseHandler(event) {
   }
   closeModalHandler();
 }
-//--------------Alternative close Modal by clicking Escape button----------------------------
+//--------------Alternative close Modal by Escape button----------------------------
 function escapeHanler(evt) {
   if (evt.code !== 'Escape') {
     return;
