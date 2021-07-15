@@ -69,9 +69,11 @@ const jsGallery = document.querySelector('.js-gallery');
 const listEl = galleryItems
   .map(
     ({ preview, original, description }) =>
-      `<li class="gallery__item"><a class="gallery__link" href = ${original}><img class="gallery__image" src="${preview}" alt="${description}"></li></a>`,
+      `<li class="gallery__item"><a class="gallery__link" href = "${original}"><img class="gallery__image" src="${preview}" alt="${description}"></li></a>`,
   )
   .join('');
+
+// console.log(listEl);
 
 jsGallery.insertAdjacentHTML('beforeend', listEl);
 jsGallery.addEventListener('click', openModalHandler);
@@ -157,3 +159,30 @@ function rightKeyHandler(evt) {
   modalImage.src = originalSrcArray[currentImageIndex + 1];
 }
 //------------------------------------------------------------------------
+
+//================ пример функции от ментотра ====================
+// function keyboardManipulation({ key }) {
+//   switch (key) {
+//     case gallery.length - 1 > activeIndex && 'ArrowRight':
+//       activeIndex += 1;
+//       refs.modalImg.src = gallery[activeIndex].original;
+//       break;
+//     case activeIndex > 0 && 'ArrowLeft':
+//       activeIndex -= 1;
+//       refs.modalImg.src = gallery[activeIndex].original;
+//       break;
+//     case activeIndex === gallery.length - 1 && 'ArrowRight':
+//       activeIndex = 0;
+//       refs.modalImg.src = gallery[activeIndex].original;
+//       break;
+//     case activeIndex === 0 && 'ArrowLeft':
+//       activeIndex = gallery.length - 1;
+//       refs.modalImg.src = gallery[activeIndex].original;
+//       break;
+//     case 'Escape':
+//       closeModal();
+//       break;
+//     default:
+//       alert('что-то пошло не так');
+//   }
+// }
