@@ -1,0 +1,24 @@
+{
+  "name": "goit-js-hw-08-gallery-parcel",
+  "version": "1.0.0",
+  "description": "Пробуем юзать Parcel",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZhukovMikhail/goit-js-hw-08-gallery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZhukovMikhail/goit-js-hw-08-gallery/issues"
+  },
+  "homepage": "https://github.com/ZhukovMikhail/goit-js-hw-08-gallery#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
